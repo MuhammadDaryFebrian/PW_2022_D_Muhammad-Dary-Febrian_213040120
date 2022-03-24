@@ -1,8 +1,9 @@
 <?php
 $mahasiswa = [
-    ["Sandhika Galih", "043040023", "Teknik Informatika", "sandhikagalih@unpas.ac.id"],
-    ["Doddy Ferdiansyah", "033040001", "Teknik Industri", "doddy@yahoo.com"],
-    ["Erik", "023040123", "Teknik Planologi", "erik@gmail.com"]
+    ["Sandhika Galih", "043040023", "sandhikagalih@unpas.ac.id", "Teknik Informatika"],
+    ["Doddy Ferdiansyah", "103040001", "doddy@gmail.com", "Teknik Mesin"],
+    ["Erik", "133040321", "erik@mail.unpas.ac.id", "Teknik Informatika"],
+    ["Anggoro Ari", "anggoro@gmail.com", "1033040123", "Teknik Industri"],
 ];
 
 ?>
