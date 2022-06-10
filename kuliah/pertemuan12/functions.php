@@ -1,7 +1,8 @@
 <?php
 
 function koneksi() {
-    $conn = mysqli_connect('localhost', 'root','', 'pw2022_d_213040120') or die('Koneksi ke DB GAGAL!');
+    $conn = mysqli_connect('localhost', 'root', 
+    '', 'pw_2022_d_213040120') or die('Koneksi ke DB GAGAL!');
 
     return $conn;
 }

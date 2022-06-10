@@ -3,19 +3,17 @@ require 'functions.php';
 
 // Query ke tabel mahasiswa
   $mahasiswa = query("SELECT * FROM mahasiswa");
-
-  // Query tabel mahasiswa sesuai keyword pencarian
-  if(isset($_GET["Cari"])){
-    $keyword = $_GET["keyword"];
-    $query = "SELECT * FROM mahasiswa
-               WHERE
-                nama LIKE '%$keyword%' OR
-                npm LIKE '%$keyword%'";
-    $mahasiswa = query($query);
-  }
-
-  ?> 
-
+// Query tabel mahasiswa sesuai keyword pencarian
+if(isset($_GET["cari"])) {
+  $keyword = $_GET["keyword"];
+  $query = "SELECT * FROM mahasiswa
+              WHERE 
+            nama LIKE '%$keyword%' OR
+            npm LIKE '%$keyword%'";
+  $mahasiswa = query($query);
+}
+?>
+  
 <!doctype html>
 <html lang="en">
   <head>
@@ -31,19 +29,17 @@ require 'functions.php';
   <body>
 
     <div class="container">
-      <h1>Daftar Mahasiswa</h1>
+      <h1 class="align-midcle">Daftar Mahasiswa</h1>
       <a href="tambah.php" class="btn btn-primary">Tambah Data</a>
-<form action="" method="get" class="mt-3">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control"
-    name="keyword" placeholder="Masukan keyword pencarian...">
-    <button class="btn btn-primary" type="submit"
-    name="Cari">Cari</button>
-</div>
-</form>
 
+      <form action="" method="GET" class="mt-4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="keyword" placeholder="Masukkan Keyword Pencarian.." autocomplete="off"> 
+          <button class="btn btn-primary" type="submit" name="cari">Cari</button>
+        </div>
+      </form>
 
-<table class="table">
+      <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -70,8 +66,8 @@ $no = 1;
       <td class="align-middle"><?php echo $mhs["email"]; ?></td>
       <td class="align-middle"><?php echo $mhs["jurusan"]; ?></td>
       <td class="align-middle">
-        <a href="ubah1.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-warning">ubah</a>
-        <a href="hapus1.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-danger" onclick="return confirm('yakin?');">hapus</a>
+        <a href="ubah.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-warning">ubah</a>
+        <a href="hapus.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-danger" onclick="return confirm('yakin?');">hapus</a>
       </td>
     </tr>
     <?php endforeach; ?>

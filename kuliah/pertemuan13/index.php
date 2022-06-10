@@ -1,25 +1,19 @@
 <?php
-$mahasiswa = [
-    ["nama" => "Sandhika Galih",
-    "npm" => "043040023",
-    "jurusan" => "Teknik Informatika",
-    "email" => "sandhikagalih@unpas.ac.id",
-    "gambar" => "contoh.png"
-],
-    ["nama" => "Doddy Ferdiansyah",
-    "npm" => "033040001",
-    "jurusan" => "Teknik Industri",
-    "email" => "doddy@yahoo.com",
-    "gambar" => "contoh2.png"
-],
-    ["nama" => "Erik",
-    "npm" => "023040123",
-    "jurusan" => "Teknik Planologi",
-    "email" => "erik@gmail.com",
-    "gambar" => "contoh3.jpg"
-    ]
-];
+require 'function.php';
+
+// Query ke tabel mahasiswa
+  $mahasiswa = query("SELECT * FROM mahasiswa");
+// Query tabel mahasiswa sesuai keyword pencarian
+if(isset($_GET["cari"])) {
+  $keyword = $_GET["keyword"];
+  $query = "SELECT * FROM mahasiswa
+              WHERE 
+            nama LIKE '%$keyword%' OR
+            npm LIKE '%$keyword%'";
+  $mahasiswa = query($query);
+}
 ?>
+  
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,14 +24,22 @@ $mahasiswa = [
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Data Mahasiswa</title>
+    <title>Daftar Mahasiswa</title>
   </head>
   <body>
 
     <div class="container">
-        <h1>Daftar Mahasiswa</h1>
+      <h1 class="align-midcle">Daftar Mahasiswa</h1>
+      <a href="tambah.php" class="btn btn-primary">Tambah Data</a>
 
-        <table class="table">
+      <form action="" method="GET" class="mt-4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="keyword" placeholder="Masukkan Keyword Pencarian.." autocomplete="off"> 
+          <button class="btn btn-primary" type="submit" name="cari">Cari</button>
+        </div>
+      </form>
+
+      <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -50,23 +52,29 @@ $mahasiswa = [
     </tr>
   </thead>
   <tbody>
-      <?php $i = 1; foreach($mahasiswa as $mhs) : ?>
+  
+  <?php
+$no = 1;
+    foreach($mahasiswa as $mhs) : ?>
     <tr>
-      <th scope="row" class="align-middle"><?= $i++; ?></th>
-      <td class="align-middle"><img src="img/<?php echo $mhs["gambar"]; ?>" height="50" class="rounded-circle">
-    </td>
-      <td class="align-middle"><?= $mhs["nama"]; ?></td>
-      <td class="align-middle"><?= $mhs["npm"]; ?></td>
-      <td class="align-middle"><?= $mhs["email"]; ?></td>
-      <td class="align-middle"><?= $mhs["jurusan"]; ?></td>
+      <th scope="row" class="align-middle"><?php echo $no++; ?></th>
       <td class="align-middle">
-        <a herf="" class="btn badge bg-warning">edit</a>
-        <a herf="" class="btn badge bg-danger">delete</a>
+        <img src="img/<?php echo $mhs ["gambar"]?>" height="50" class="rounded-circle">
+      </td>
+      <td class="align-middle"><?php echo $mhs["nama"]; ?></td>
+      <td class="align-middle"><?php echo $mhs["npm"]; ?></td>
+      <td class="align-middle"><?php echo $mhs["email"]; ?></td>
+      <td class="align-middle"><?php echo $mhs["jurusan"]; ?></td>
+      <td class="align-middle">
+        <a href="ubah.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-warning">ubah</a>
+        <a href="hapus.php?id=<?= $mhs["id"]; ?>" class="btn badge bg-danger" onclick="return confirm('yakin?');">hapus</a>
       </td>
     </tr>
-    <?php endforeach ?>
+    <?php endforeach; ?>
   </tbody>
 </table>
+    </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

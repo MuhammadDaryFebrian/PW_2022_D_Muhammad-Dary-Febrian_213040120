@@ -1,5 +1,5 @@
 <?php
-require 'functions1.php';
+require 'functions.php';
 
 // cek ketika tombol tambah sudah diklik
 if(isset($_POST['tambah'])) {
@@ -33,7 +33,7 @@ if(isset($_POST['tambah'])) {
 
     <div class="container">
       <h1>Tambah Data Mahasiswa</h1>
-      <a href="index.php" class="btn btn-primary">Kembali ke Daftar Mahasiswa</a>
+      <a href="kuliah_latihan1.php" class="btn btn-primary">Kembali ke Daftar Mahasiswa</a>
 
       <div class="row mt-3">
           <div class="col-8">
